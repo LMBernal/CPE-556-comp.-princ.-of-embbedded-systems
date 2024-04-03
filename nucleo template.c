@@ -26,16 +26,16 @@ void configure_LED_pin(){
   RCC->AHB2ENR |= RCC_AHB2ENR_GPIOAEN;
 
     // GPIO Mode: Input(00), Output(01), AlterFunc(10), Analog(11, reset)
-    GPIOA->MODER &= ~(3UL<<(2LED_PIN));
-    GPIOA->MODER |=   1UL<<(2LED_PIN);      // Output(01)
+    GPIOA->MODER &= ~(3UL<<(2*LED_PIN));
+    GPIOA->MODER |=   1UL<<(2*LED_PIN);      // Output(01)
 
     // GPIO Output Type: Output push-pull (0, reset), Output open drain (1) 
     GPIOA->OTYPER &= ~(1<<LED_PIN);      // Push-pull
 
 
     // GPIO Speed: Low speed (00), Medium speed (01), Fast speed (10), High speed (11)
-    GPIOA->OSPEEDR &= ~(3<<(2LED_PIN));
-    GPIOA->OSPEEDR |=   2<<(2LED_PIN);  // Fast speed
+    GPIOA->OSPEEDR &= ~(3<<(2*LED_PIN));
+    GPIOA->OSPEEDR |=   2<<(2*LED_PIN);  // Fast speed
 
 
     // GPIO Push-Pull: No pull-up, pull-down (00), Pull-up (01), Pull-down (10), Reserved (11)
