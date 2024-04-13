@@ -82,6 +82,12 @@ void LED_Toggle(void){
     for (volatile uint32_t i = 0; i < 100000; ++i) {} // Adjust this delay as needed
 }
 
+void LED_Toggle2(void){
+    GPIOA->ODR ^= (1UL << LED_PIN_2);
+    // Introduce a short delay to speed up the toggle
+    for (volatile uint32_t i = 0; i < 100000; ++i) {} // Adjust this delay as needed
+}
+
 void EXTI_Init(void){
     // GPIO Configuration
     RCC->AHB2ENR |= RCC_AHB2ENR_GPIOAEN;
@@ -126,9 +132,7 @@ void EXTI9_5_IRQHandler(void){
         // Clear the EXTI pending bit
         EXTI->PR1 |= (1 << EXTI_PIN_2);
         // Toggle the second LED
-        GPIOA->ODR ^= (1UL << LED_PIN_2);
-        // Introduce a short delay
-        for (volatile uint32_t i = 0; i < 100000; ++i) {} // Adjust as needed
+        LED_Toggle2();
     }
 }
 
